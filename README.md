@@ -10,13 +10,13 @@ It works with **Claude Code**, **Codex** and **Antigravity**.
 npx github:mithulpranav24012008/3d-studio
 ```
 
-That one command installs 3D Studio and the 20 skills it runs, for all three agents, into your user folder. You need [Node.js](https://nodejs.org) 18 or later. The installer shows what each skill source contains and asks before installing it, so expect eight confirmations.
+That one command installs 3D Studio and the 20 skills it runs, for all three agents, into your user folder. You need [Node.js](https://nodejs.org) 18 or later. The installer lists every skill and where it comes from, then asks once before installing anything.
 
 Then restart your agent.
 
 | Option | What it does |
 |---|---|
-| `--yes` | Skips the confirmations |
+| `--yes` | Skips the confirmation, which is required when there's no terminal to ask in |
 | `--agents claude-code,codex` | Installs for only the agents you list |
 | `--only-skill` | Installs 3D Studio alone, without the 20 skills |
 | `--project` | Installs into the current project instead of your user folder |
@@ -101,7 +101,7 @@ This repository contains only the 3D Studio skill and its installer. The install
 | `blender-mcp` | [vladmdgolam/agent-skills](https://github.com/vladmdgolam/agent-skills) |
 | `anatomy` | [wheresryan22/anatomy](https://github.com/wheresryan22/anatomy) |
 
-Skills are instructions your agent follows, and some include scripts it can run. These come from third parties and install at their latest version, so read the confirmations rather than skipping them if that matters to you.
+Skills are instructions your agent follows, and some include scripts it can run. They run with your agent's permissions. These come from third parties and install at their latest version, so it's worth looking through their repositories first.
 
 ## Where the files go
 

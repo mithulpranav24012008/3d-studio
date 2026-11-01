@@ -5,6 +5,7 @@ import { spawnSync } from 'node:child_process';
 import { cpSync, existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
+import { createInterface } from 'node:readline/promises';
 
 const SKILLS_CLI = 'skills@1.7.4';
 const AGENTS = ['claude-code', 'codex', 'antigravity'];
@@ -30,7 +31,7 @@ const HELP = `Install 3D Studio and the skills it runs.
   npx github:${SELF}
 
 Options
-  --yes            Skip the confirmation prompts
+  --yes            Skip the confirmation
   --agents <list>  Comma-separated: ${AGENTS.join(',')} (default: all three)
   --only-skill     Install 3D Studio alone, without the skills it runs
   --project        Install into the current project instead of your user folder
@@ -94,7 +95,22 @@ function copyToAntigravity(names) {
   return skipped;
 }
 
-function main() {
+// The skills CLI doesn't prompt once skills and agents are named, so the one confirmation lives here.
+async function confirm(sources, options) {
+  console.log(`This will install for ${options.agents.join(', ')}:\n`);
+  for (const [source, skills] of sources) console.log(`  ${source}: ${skills.join(', ')}`);
+  console.log('\nSkills are instructions your agent follows, and some include scripts. They run with your agent\'s permissions.');
+  if (!process.stdin.isTTY) {
+    console.error('\nNo terminal to ask in. Add --yes to install anyway.');
+    return false;
+  }
+  const prompt = createInterface({ input: process.stdin, output: process.stdout });
+  const answer = await prompt.question('\nInstall these? (y/N) ');
+  prompt.close();
+  return /^y(es)?$/i.test(answer.trim());
+}
+
+async function main() {
   const options = parse(process.argv.slice(2));
   if (options.help) {
     console.log(HELP);
@@ -102,6 +118,10 @@ function main() {
   }
 
   const sources = [[options.from, ['3d-studio']], ...(options.onlySkill ? [] : DEPENDENCIES)];
+  if (!options.yes && !(await confirm(sources, options))) {
+    console.log('Nothing installed.');
+    return 1;
+  }
   const failed = [];
   for (const [index, [source, skills]] of sources.entries()) {
     console.log(`\n[${index + 1}/${sources.length}] ${skills.length > 1 ? `${skills.length} skills` : skills[0]} from ${source}`);
@@ -122,7 +142,7 @@ function main() {
 }
 
 try {
-  process.exitCode = main();
+  process.exitCode = await main();
 } catch (error) {
   console.error(`${error.message}\n\n${HELP}`);
   process.exitCode = 1;
