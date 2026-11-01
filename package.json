@@ -1,0 +1,18 @@
+{
+  "name": "3d-studio-skill",
+  "version": "1.0.0",
+  "description": "One command for the whole 3D website toolkit, as an agent skill for Claude Code, Codex and Antigravity.",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "3d-studio-skill": "bin/install.mjs"
+  },
+  "files": [
+    "bin",
+    "skills"
+  ],
+  "engines": {
+    "node": ">=18"
+  }
+}
