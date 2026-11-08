@@ -66,7 +66,7 @@ When the work needs a real photograph or clip (a backdrop, a texture on a surfac
 |---|---|---|
 | [Pexels](https://www.pexels.com) | Modern photos and video: people, places, nature, products, textures, backgrounds | [Pexels License](https://www.pexels.com/license/): free, commercial use and editing allowed, credit optional |
 | [Archival Footage](https://archival-footage.com) | Historical and archival film and stills | Not stated site-wide. Read the license on each item's own page before using it |
-| Destocked (also written Destokd) | Reserved. The user named it, but no working site has been found: `destocked.com` is a parked domain for sale and no `destokd` domain responds. Don't search for it or guess an address | Add its address and terms here once the user confirms them |
+| [Destockd](https://destockd.com) | Historical footage as short, ready-cut shots: 41,000+ clips from U.S. government films (FedFlix on archive.org). Best for B-roll, period texture and archival cutaways | [Legal](https://destockd.com/#/legal): believed public domain or unrestricted in the U.S., free, no account, no credit required. Not independently cleared per clip |
 
 **Finding images.** Search with the subject and the use in mind: orientation, how large it will be on screen, and whether it has to tile.
 - **Pexels with a key:** if `PEXELS_API_KEY` is set, use the API with the header `Authorization: $PEXELS_API_KEY`:
@@ -75,6 +75,7 @@ When the work needs a real photograph or clip (a backdrop, a texture on a surfac
   - `orientation` is `landscape`, `portrait` or `square`. Stay well under the rate limit (200 requests an hour).
   - Images fetched through the API must be credited: a visible "Photos provided by Pexels" link in the product, plus "Photo by <name> on Pexels" where possible.
 - **Pexels without a key:** search on pexels.com and download from the photo's page.
+- **Destockd:** search by describing what is on screen ("crowd running", "1950s kitchen") in the site's search box; it searches the pictures, not titles. Use "See similar shots" to widen the choice, then "Download clip". Searches don't produce a shareable URL, so record each shot's own page instead.
 - **Keys:** never write the key into the project, a commit or a log.
 
 **Downloading.**
@@ -87,6 +88,7 @@ When the work needs a real photograph or clip (a backdrop, a texture on a surfac
 **Respect the terms.**
 - **Pexels:** don't sell an unaltered copy, don't imply that a person or brand endorses anything, don't use an image as a logo or trademark, don't show identifiable people in an offensive light, and don't redistribute images through another stock or wallpaper site.
 - **Archival Footage:** if an item's page doesn't clearly allow the intended use (commercial or not, credit, editing), don't use it. Tell the user what you found instead.
+- **Destockd:** the site doesn't clear each clip, and grants no model, property or trademark releases. For commercial work, open the shot's linked Internet Archive and National Archives records. Then tell the user the clip still needs their rights check. Watch for music, logos and recognisable people inside old films. Some footage shows war and atrocities; don't use it casually.
 - **Logos, products and people:** avoid recognisable brands and logos in any image, and identifiable people unless the use is plainly fine.
 
 **When a site blocks automated access** (a CAPTCHA, a bot check, a sign-in), don't try to get past it. Give the user the search or the item's link and ask them to download the file into the project, then carry on.

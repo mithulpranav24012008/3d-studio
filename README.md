@@ -80,7 +80,7 @@ Loading every skill at once would use up the working memory the build needs. So 
 
 ### Images and footage
 
-When a build needs a real photo or clip, 3D Studio takes it from [Pexels](https://www.pexels.com) (modern photos and video) or [Archival Footage](https://archival-footage.com) (historical film and stills). It downloads the file into the project and records its source, author and license in `ASSETS.md`. Set `PEXELS_API_KEY` to let it search Pexels through the [API](https://www.pexels.com/api/); without a key it searches the website. If a site blocks automated access, it asks you to download the file instead. Destocked (Destokd) has a reserved slot until its address is confirmed. Images fetched through the Pexels API need a visible "Photos provided by Pexels" credit, which it adds.
+When a build needs a real photo or clip, 3D Studio takes it from [Pexels](https://www.pexels.com) (modern photos and video), [Archival Footage](https://archival-footage.com) (historical film and stills), or [Destockd](https://destockd.com) (ready-cut public-domain shots from U.S. government films). It downloads the file into the project and records its source, author and license in `ASSETS.md`. Set `PEXELS_API_KEY` to let it search Pexels through the [API](https://www.pexels.com/api/); without a key it searches the website. If a site blocks automated access, it asks you to download the file instead. Images fetched through the Pexels API need a visible "Photos provided by Pexels" credit, which it adds.
 
 ### 3. Checks the result
 
