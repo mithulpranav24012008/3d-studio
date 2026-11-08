@@ -78,6 +78,10 @@ Loading every skill at once would use up the working memory the build needs. So 
 4. **Render on demand.** An idle page draws nothing, so a phone stays cool.
 5. **Make it fully usable.** That means real buttons beside the canvas, keyboard use, reduced motion, a fallback without WebGL, and a layout that works at phone width.
 
+### Images and footage
+
+When a build needs a real photo or clip, 3D Studio takes it from [Pexels](https://www.pexels.com) (modern photos and video) or [Archival Footage](https://archival-footage.com) (historical film and stills). It downloads the file into the project and records its source, author and license in `ASSETS.md`. Set `PEXELS_API_KEY` to let it search Pexels through the [API](https://www.pexels.com/api/); without a key it searches the website. If a site blocks automated access, it asks you to download the file instead. Destocked (Destokd) has a reserved slot until its address is confirmed. Images fetched through the Pexels API need a visible "Photos provided by Pexels" credit, which it adds.
+
 ### 3. Checks the result
 
 - Drives a real browser with real clicks and drags, including reversing and interrupting animations.

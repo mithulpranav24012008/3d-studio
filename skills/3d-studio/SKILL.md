@@ -10,7 +10,7 @@ Runs a set of 3D web skills as one workflow. The request is in `$ARGUMENTS`. If 
 
 ## 1. Choose the skills
 
-Each of these is a separate skill. Load it the way your agent loads skills, under exactly the name shown: the Skill tool in Claude Code, or by reading its `SKILL.md` in Codex and Antigravity. Its instructions then apply alongside this workflow. Section 4 lists where to find the folders.
+Each of these is a separate skill. Load it the way your agent loads skills, under exactly the name shown: the Skill tool in Claude Code, or by reading its `SKILL.md` in Codex and Antigravity. Its instructions then apply alongside this workflow. Section 5 lists where to find the folders.
 
 **Always load these three:** `taste-skill` (art direction; it may be installed as `design-taste-frontend`), `apple-design` (fluid physical motion, materials and depth), `threejs-fundamentals` (scene, camera, renderer, loop).
 
@@ -30,6 +30,7 @@ Each of these is a separate skill. Load it the way your agent loads skills, unde
 | Slowness, stutter, a blank canvas, memory | `threejs-performance`, `threejs-debug-profiler` |
 | Isometric figures, diagrams or explainers showing how something works, or a printed A4 poster of one | `anatomy` |
 | A rendered film or video | Remotion, see section 3 |
+| A real photo, texture, backdrop or footage clip | No extra skill; follow section 4 |
 
 Together these skills run to thousands of lines, and loading them all uses up working memory that the build needs. That is why the table is the default.
 
@@ -57,7 +58,40 @@ No Remotion skill is part of this set, so use the `remotion` package directly in
 - Render with `remotion render <entry> <composition> <out.mp4> --gl=angle --codec=h264 --crf=24`.
 - A changed scene doesn't change a film that's already rendered. Re-render it, or tell the user it's out of date.
 
-## 4. Check it before calling it done
+## 4. Images and footage
+
+When the work needs a real photograph or clip (a backdrop, a texture on a surface, an environment behind a product, a reference, a shot in a film), take it from these sites before anything else. Use them only when a real image is the better choice; geometry, shaders and gradients built in code stay the default.
+
+| Site | Use it for | Terms |
+|---|---|---|
+| [Pexels](https://www.pexels.com) | Modern photos and video: people, places, nature, products, textures, backgrounds | [Pexels License](https://www.pexels.com/license/): free, commercial use and editing allowed, credit optional |
+| [Archival Footage](https://archival-footage.com) | Historical and archival film and stills | Not stated site-wide. Read the license on each item's own page before using it |
+| Destocked (also written Destokd) | Reserved. The user named it, but no working site has been found: `destocked.com` is a parked domain for sale and no `destokd` domain responds. Don't search for it or guess an address | Add its address and terms here once the user confirms them |
+
+**Finding images.** Search with the subject and the use in mind: orientation, how large it will be on screen, and whether it has to tile.
+- **Pexels with a key:** if `PEXELS_API_KEY` is set, use the API with the header `Authorization: $PEXELS_API_KEY`:
+  - photos: `GET https://api.pexels.com/v1/search?query=...&orientation=landscape&per_page=15`
+  - videos: `GET https://api.pexels.com/v1/videos/search?query=...`
+  - `orientation` is `landscape`, `portrait` or `square`. Stay well under the rate limit (200 requests an hour).
+  - Images fetched through the API must be credited: a visible "Photos provided by Pexels" link in the product, plus "Photo by <name> on Pexels" where possible.
+- **Pexels without a key:** search on pexels.com and download from the photo's page.
+- **Keys:** never write the key into the project, a commit or a log.
+
+**Downloading.**
+- Download the file into the project, under `public/images/` or `public/footage/`, with a descriptive name. Don't hotlink.
+- Take the smallest size that stays sharp where it's used.
+- For textures, follow `threejs-textures` (colour space, compression, power-of-two sizes where it matters).
+
+**Record every asset.** Add a line to `ASSETS.md` at the project root: the file, the site, the item's page URL, the author, the license, and the date. Keep it even where credit is optional. Show credits in the product when a license asks for them.
+
+**Respect the terms.**
+- **Pexels:** don't sell an unaltered copy, don't imply that a person or brand endorses anything, don't use an image as a logo or trademark, don't show identifiable people in an offensive light, and don't redistribute images through another stock or wallpaper site.
+- **Archival Footage:** if an item's page doesn't clearly allow the intended use (commercial or not, credit, editing), don't use it. Tell the user what you found instead.
+- **Logos, products and people:** avoid recognisable brands and logos in any image, and identifiable people unless the use is plainly fine.
+
+**When a site blocks automated access** (a CAPTCHA, a bot check, a sign-in), don't try to get past it. Give the user the search or the item's link and ask them to download the file into the project, then carry on.
+
+## 5. Check it before calling it done
 
 The checks use scripts inside two of the skills. Find each skill's folder by looking for its name, in this order, in `.claude/skills/` and `.agents/skills/` in the project, then `~/.claude/skills/`, `~/.agents/skills/` and `~/.gemini/config/skills/`. Below, `<anatomy>` and `<taste>` stand for those folders. `<taste>` is named either `taste-skill` or `design-taste-frontend`.
 
@@ -68,8 +102,10 @@ Use `node <anatomy>/scripts/drive.mjs <url> --actions steps.json` to drive a rea
 - **Check the design.** Run `node <taste>/scripts/inspect.mjs <url> --widths 1440,390`, then look at the screenshots yourself. Passing the inspector is the minimum, not the grade.
 - **Run the tests and read the console.** Then repeat the main flow on the production build, not just the dev server.
 
+If the build uses downloaded images or footage, check that each one appears in `ASSETS.md` with its license.
+
 Report what was verified and, plainly, what wasn't: real devices, sound, and motion seen at full speed are usually out of reach here.
 
-## 5. Installing anything new
+## 6. Installing anything new
 
 If a skill in the table is missing, the user can install the whole set with `npx github:mithulpranav24012008/3d-studio`. For any other skill or tool the task needs, give the user the command and let them run it, so they see its security summary. Don't use `-y` to skip confirmation.
