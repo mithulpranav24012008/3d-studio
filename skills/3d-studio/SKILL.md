@@ -1,6 +1,6 @@
 ---
 name: 3d-studio
-description: One command for the whole 3D website toolkit. Combines taste-skill, apple-design, animate, anatomy, the threejs-* skills, r3f-*, blender-mcp, threejs-debug-profiler and Remotion, loading what the job needs and checking the result in a real browser. Use when the user types /3d-studio or $3d-studio, or asks to use their full 3D toolkit or all their 3D skills together. Add --all to load everything, or --plan to see the selection without building.
+description: One command for the whole 3D website toolkit. Combines taste-skill, apple-design, animate, anatomy, the threejs-* skills, r3f-*, blender-mcp, threejs-debug-profiler, the OpenMotion motion-* skills and Remotion, loading what the job needs and checking the result in a real browser. Use when the user types /3d-studio or $3d-studio, or asks to use their full 3D toolkit or all their 3D skills together. Add --all to load everything, or --plan to see the selection without building.
 argument-hint: "[--plan | --all] what to build"
 ---
 
@@ -29,7 +29,11 @@ Each of these is a separate skill. Load it the way your agent loads skills, unde
 | A React project | `threejs-react-three-fiber`, `r3f-fundamentals` |
 | Slowness, stutter, a blank canvas, memory | `threejs-performance`, `threejs-debug-profiler` |
 | Isometric figures, diagrams or explainers showing how something works, or a printed A4 poster of one | `anatomy` |
-| A rendered film or video | Remotion, see section 3 |
+| A motion film or video: a promo, explainer, brand film or title sequence | `motion-director`, see section 3 |
+| Remaking a reference video, or filling an existing motion template | `motion-recreate` or `motion-template-to-video`, see section 3 |
+| Turning a video into a reusable template | `motion-video-to-template`, see section 3 |
+| Editing, previewing or exporting an existing OpenMotion project | `motion-production`, see section 3 |
+| A film rendered from the site's own 3D scene | Remotion, see section 3 |
 | A real photo, texture, backdrop or footage clip | No extra skill; follow section 4 |
 
 Together these skills run to thousands of lines, and loading them all uses up working memory that the build needs. That is why the table is the default.
@@ -49,7 +53,27 @@ Load each skill at the point this workflow needs it. If a skill opens with a set
 4. **Render on demand.** Draw only when something moved, and not at all off screen, so an idle page costs nothing and a phone stays cool.
 5. **Make it fully usable.** It needs real buttons beside the canvas, keyboard use, reduced motion, a fallback with no WebGL, and a layout that works at phone width.
 
-## 3. Remotion
+## 3. Films: OpenMotion or Remotion
+
+Choose the tool by what the film is made of.
+
+- **OpenMotion** for a motion film made from scenes, type, footage and sound: a promo, an explainer, a brand film, a title sequence, a remake of a reference video, or a film from an editable template. Its five skills come from [nexu-io/openmotion](https://github.com/nexu-io/openmotion):
+  - `motion-director`: original films, and redesigning their story, motion or sound;
+  - `motion-recreate`: rebuilding a reference video as the user's own editable project;
+  - `motion-template-to-video`: making a film from an existing template;
+  - `motion-video-to-template`: turning a video into a reusable template;
+  - `motion-production`: edits, previews, checks and export of an existing project.
+- **Remotion** for a film rendered from the site's own Three.js scene, so film and site share one scene and can't drift apart.
+
+### OpenMotion
+
+The skills are instructions; the work runs through the OpenMotion app's `motion_*` tools (for example `motion_list_templates`, `motion_create_project`). Look for them with your agent's tool search before starting.
+
+- **Tools connected:** load the skill from the table and follow it. It reads `motion-production/references/context.md` first. Parts of the skills are written in Chinese; answer the user in their own language.
+- **Tools missing:** say so at once. The app has to be installed and connected separately (Node 26.11.1, Chrome and FFmpeg; see "Bring it into your agent" in its README, with `--host claude` for Claude Code). Give the user that step to run rather than running it yourself, as section 6 says. Until then, plan the film with `motion-director` if asked, or build it with Remotion when it fits.
+- The project open in the OpenMotion editor is the deliverable. Export an MP4 only when the user asks for a file.
+
+### Remotion
 
 No Remotion skill is part of this set, so use the `remotion` package directly in the project.
 
@@ -106,8 +130,10 @@ Use `node <anatomy>/scripts/drive.mjs <url> --actions steps.json` to drive a rea
 
 If the build uses downloaded images or footage, check that each one appears in `ASSETS.md` with its license.
 
+For an OpenMotion film, follow the checks in `motion-production/references/verification.md` and `motion-director/references/motion-review.md` instead of the browser scripts.
+
 Report what was verified and, plainly, what wasn't: real devices, sound, and motion seen at full speed are usually out of reach here.
 
 ## 6. Installing anything new
 
-If a skill in the table is missing, the user can install the whole set with `npx github:mithulpranav24012008/3d-studio`. For any other skill or tool the task needs, give the user the command and let them run it, so they see its security summary. Don't use `-y` to skip confirmation.
+If a skill in the table is missing, the user can install the whole set with `npx github:mithulpranav24012008/3d-studio`. That installs the OpenMotion skills too, but not the OpenMotion app they drive (section 3). For any other skill or tool the task needs, give the user the command and let them run it, so they see its security summary. Don't use `-y` to skip confirmation.

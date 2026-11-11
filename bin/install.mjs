@@ -24,6 +24,10 @@ const DEPENDENCIES = [
   ['EnzeD/r3f-skills', ['r3f-fundamentals']],
   ['vladmdgolam/agent-skills', ['blender-mcp']],
   ['wheresryan22/anatomy', ['anatomy']],
+  ['nexu-io/openmotion', [
+    'motion-director', 'motion-production', 'motion-recreate', 'motion-template-to-video',
+    'motion-video-to-template',
+  ]],
 ];
 
 const HELP = `Install 3D Studio and the skills it runs.

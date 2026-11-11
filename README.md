@@ -10,7 +10,7 @@ It works with **Claude Code**, **Codex** and **Antigravity**.
 npx github:mithulpranav24012008/3d-studio
 ```
 
-That one command installs 3D Studio and the 20 skills it runs, for all three agents, into your user folder. You need [Node.js](https://nodejs.org) 18 or later. The installer lists every skill and where it comes from, then asks once before installing anything.
+That one command installs 3D Studio and the 25 skills it runs, for all three agents, into your user folder. You need [Node.js](https://nodejs.org) 18 or later. The installer lists every skill and where it comes from, then asks once before installing anything.
 
 Then restart your agent.
 
@@ -18,7 +18,7 @@ Then restart your agent.
 |---|---|
 | `--yes` | Skips the confirmation, which is required when there's no terminal to ask in |
 | `--agents claude-code,codex` | Installs for only the agents you list |
-| `--only-skill` | Installs 3D Studio alone, without the 20 skills |
+| `--only-skill` | Installs 3D Studio alone, without the 25 skills |
 | `--project` | Installs into the current project instead of your user folder |
 | `--from <source>` | Installs 3D Studio from a fork or a local folder |
 
@@ -68,7 +68,8 @@ Loading every skill at once would use up the working memory the build needs. So 
 | A React project | `threejs-react-three-fiber`, `r3f-fundamentals` |
 | Slowness, stutter, a blank canvas, memory | `threejs-performance`, `threejs-debug-profiler` |
 | Isometric figures, diagrams, explainers, A4 posters | `anatomy` |
-| A rendered film or video | The `remotion` package, used directly in the project |
+| A motion film: promo, explainer, brand film, a remake of a reference video, or one from a template | The OpenMotion skills: `motion-director`, `motion-recreate`, `motion-template-to-video`, `motion-video-to-template`, `motion-production` |
+| A film rendered from the site's own 3D scene | The `remotion` package, used directly in the project |
 
 ### 2. Builds in a set order
 
@@ -104,6 +105,9 @@ This repository contains only the 3D Studio skill and its installer. The install
 | `r3f-fundamentals` | [EnzeD/r3f-skills](https://github.com/EnzeD/r3f-skills) |
 | `blender-mcp` | [vladmdgolam/agent-skills](https://github.com/vladmdgolam/agent-skills) |
 | `anatomy` | [wheresryan22/anatomy](https://github.com/wheresryan22/anatomy) |
+| 5 `motion-*` skills (OpenMotion films) | [nexu-io/openmotion](https://github.com/nexu-io/openmotion) |
+
+The OpenMotion skills drive the OpenMotion app, which this installer doesn't install. To make films with them, set up the app and connect it to your agent as its [README](https://github.com/nexu-io/openmotion#agent-setup) describes; until then 3D Studio renders films with Remotion.
 
 Skills are instructions your agent follows, and some include scripts it can run. They run with your agent's permissions. These come from third parties and install at their latest version, so it's worth looking through their repositories first.
 
